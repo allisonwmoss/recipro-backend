@@ -18,7 +18,7 @@ mongoose.connection.once('open', () => {
 
 //import seeds
 const seeds = require('./models/seeds')
-console.log(`seeds outside the seed route: ${seeds}`)
+
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -26,13 +26,14 @@ app.use(cors())
 
 //seed route
 app.get('/seed-data', (req, res, next) => {
-    console.log('seed route hit')
-    console.log(seeds)
-    console.log(Recipe)
-    Recipe.insertMany(seeds)
-        .then((res) => console.log(res))
-        .catch(next)
-    res.send('Seed recipes inserted.')
+    Recipe.deleteMany({})
+        .then(() => {
+            Recipe.insertMany(seeds)
+                .then((res) => console.log(res))
+                .catch(next)
+            res.send('Seed recipes inserted.')
+        })
+        .catch(console.error)
 })
 
 app.get('/', (req, res, next) => {
