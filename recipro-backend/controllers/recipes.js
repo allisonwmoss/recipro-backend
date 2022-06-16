@@ -1,43 +1,42 @@
 const express = require('express');
-const recipes = express.Router();
+const router = express.Router();
 
-//import database
+//import model
 const Recipe = require('../models/Recipe');
 
 //index
-recipes.get('/', (req, res, next) => {
+router.get('/', (req, res, next) => {
     Recipe.find({})
-        .populate('owner')
-        .then(recipes => res.status(200).send(recipes))
+        // .populate('owner')
+        .then(recipes => res.json(recipes))
         .catch(next)
 })
 
 //show
-recipes.get('/:id', (req, res, next) => {
+router.get('/:id', (req, res, next) => {
     Recipe.findById(req.params.id)
-        .populate('owner')
-        .then(foundRecipe => res.status(200).send(foundRecipe))
+        // .populate('owner')
+        .then(foundRecipe => res.json(foundRecipe))
         .catch(next)
 })
 
 //create
-recipes.post('/', (req, res, next) => {
+router.post('/', (req, res, next) => {
     Recipe.create(req.body)
-        .then(Recipe => res.status(200).send(Recipe))
+        .then(recipe => res.status(200).send(recipe))
         .catch(next);
 })
 
 //delete
-recipes.delete('/:id', (req, res, next) => {
+router.delete('/:id', (req, res, next) => {
     Recipe.findOneAndDelete(
         { _id: req.params.id },
     )
         .then(deletedRecipe => res.status(200).send(deletedRecipe))
-        .catch(next)
 })
 
 //update
-recipes.put('/:id', (req, res, next) => {
+router.put('/:id', (req, res, next) => {
     Recipe.findOneAndUpdate(
         { _id: req.params.id },
         req.body,
@@ -47,4 +46,4 @@ recipes.put('/:id', (req, res, next) => {
         .catch(next)
 })
 
-module.exports = recipes;
+module.exports = router;
