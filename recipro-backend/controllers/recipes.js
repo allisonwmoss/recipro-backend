@@ -7,14 +7,14 @@ const Recipe = require('../models/Recipe');
 //index
 router.get('/', (req, res, next) => {
     Recipe.find({})
-        .then(recipes => res.json(recipes))
+        .then(recipes => res.status(200).send(recipes))
         .catch(next)
 })
 
 //show
 router.get('/:id', (req, res, next) => {
     Recipe.findById(req.params.id)
-        .then(foundRecipe => res.json(foundRecipe))
+        .then(foundRecipe => res.status(200).send(foundRecipe))
         .catch(next)
 })
 
@@ -31,6 +31,7 @@ router.delete('/:id', (req, res, next) => {
         { _id: req.params.id },
     )
         .then(deletedRecipe => res.status(200).send(deletedRecipe))
+        .catch(next)
 })
 
 //update

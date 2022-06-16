@@ -55,6 +55,13 @@ const seeds = [
         difficultyLevel: 1,
         recipeTags: ["vegetarian", "vegan", "healthy", "salad"]
     },
+    // {
+    //     recipeName: "Spaghetti aglio e olio",
+    //     ingredients: ["spaghetti", "garlic", "olive oil", "red pepper flakes", "parsley", "lemon"],
+    //     prepMinutes: 20,
+    //     difficultyLevel: 1,
+    //     recipeTags: ["vegetarian", "vegan", "pasta", "Italian"]
+    // },
 ]
 
 module.exports = seeds
