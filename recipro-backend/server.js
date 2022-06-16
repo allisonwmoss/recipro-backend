@@ -29,8 +29,6 @@ app.get('/seed-data', (req, res, next) => {
     console.log('seed route hit')
     console.log(seeds)
     console.log(Recipe)
-    // Recipe.deleteMany({})
-    //     .then( () =>)
     Recipe.insertMany(seeds)
         .then((res) => console.log(res))
         .catch(next)

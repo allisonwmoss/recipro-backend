@@ -7,7 +7,6 @@ const Recipe = require('../models/Recipe');
 //index
 router.get('/', (req, res, next) => {
     Recipe.find({})
-        // .populate('owner')
         .then(recipes => res.json(recipes))
         .catch(next)
 })
@@ -15,7 +14,6 @@ router.get('/', (req, res, next) => {
 //show
 router.get('/:id', (req, res, next) => {
     Recipe.findById(req.params.id)
-        // .populate('owner')
         .then(foundRecipe => res.json(foundRecipe))
         .catch(next)
 })
